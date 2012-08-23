@@ -1,0 +1,23 @@
+<html>
+  <head>
+  <!-- CSS -->
+  <tal:block repeat="reqt css_links|[]">
+    <link rel="stylesheet"
+          href="${request.static_url('deform:static/%s' % reqt)}"
+          type="text/css" />
+  </tal:block>
+  <!-- JavaScript -->
+  <tal:block repeat="reqt js_links|[]">
+    <script type="text/javascript"
+            src="${request.static_url('deform:static/%s' % reqt)}"
+     ></script>
+  </tal:block>
+  </head>
+  <body>
+    <div tal:replace="structure keyword_cloud">
+        Cloud
+    </div>
+    <a tal:attributes="href request.route_url('keyword_add')">Add keywords</a>
+    <a href="#" tal:attributes="href return_url">Back to the JCU Futures site</a>
+  </body>
+</html>
