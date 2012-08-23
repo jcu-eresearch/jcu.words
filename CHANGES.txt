@@ -1,4 +1,6 @@
-0.0
----
+0.1 (unreleased)
+----------------
 
--  Initial version
+- Created project using `pcreate` and template.
+  [davidjb]
+- Initial version
