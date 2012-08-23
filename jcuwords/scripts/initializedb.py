@@ -32,7 +32,6 @@ def main(argv=sys.argv):
     Base.metadata.create_all(engine)
     with transaction.manager:
         
-        import ipdb; ipdb.set_trace()
         txt = open(os.path.join(os.getcwd(), 'jcu.words.txt'), 'rb')
         for line in txt:
             for term in line.split(' '):
