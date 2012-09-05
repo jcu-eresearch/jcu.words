@@ -31,13 +31,12 @@ def main(argv=sys.argv):
     DBSession.configure(bind=engine)
     Base.metadata.create_all(engine)
     with transaction.manager:
-        
-        txt = open(os.path.join(os.getcwd(), 'jcu.words.txt'), 'rb')
-        for line in txt:
-            for term in line.split(' '):
-                try:
-                    term.decode('ascii')
-                except:
-                    continue
-                model = Keyword(keyword=term, user_id='system')
-                DBSession.add(model)
+        with open(os.path.join(os.getcwd(), 'jcu.words.txt'), 'rb') as txt:
+            for line in txt:
+                for term in line.split(' '):
+                    try:
+                        term.decode('ascii')
+                    except:
+                        continue
+                    model = Keyword(keyword=term.strip(), user_id='system')
+                    DBSession.add(model)
