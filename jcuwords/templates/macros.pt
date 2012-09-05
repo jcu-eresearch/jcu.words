@@ -1,0 +1,24 @@
+<metal:cloud define-macro="cloud">
+<div tal:content="structure keyword_cloud">
+        Cloud
+</div>
+</metal:cloud>
+
+<metal:messages define-macro="messages">
+  <tal:statusmsg tal:define="messages request.session.pop_flash()"
+                 tal:repeat="message messages">
+    <dl class="alert-message info"
+        tal:define="mtype message[0] | nothing;"
+        tal:attributes="class string:alert-message ${mtype};">
+        <dt tal:content="python:mtype.capitalize()">
+            Info
+        </dt>
+        <dd>
+         <span tal:replace="message[1] | nothing">
+          The status message.
+         </span>
+        </dd>
+    </dl>
+  </tal:statusmsg>
+</metal:messages>
+

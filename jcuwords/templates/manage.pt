@@ -1,0 +1,62 @@
+<html tal:define="master load:master.pt" metal:use-macro="master">
+  <body>
+    <metal:content fill-slot="content"
+       tal:define="timedelta import:datetime.timedelta;
+                   offset timedelta(hours=10);
+                   sortable_attr {'keyword': 'Keyword', 'entered_on': 'Date', 'user_id': 'User ID'};
+                   ">
+
+       <h1>Manage words</h1>
+       <div class="button-container">
+         <div class="button-group">
+           <a class="button primary icon log"
+              tal:attributes="href request.route_url('keyword_export')">
+             Export as text
+           </a>
+         </div>
+         Sort by:
+         <div class="button-group minor-group">
+           <tal:sortable repeat="attr sortable_attr">
+             <a class="button"
+                tal:attributes="href request.route_url(request.matched_route.name, _query={'sort': attr})">${sortable_attr[attr]}</a>
+           </tal:sortable>
+         </div>
+         <div class="button-group">
+             <a class="button icon arrowdown" href="#footer">Go to bottom</a>
+         </div>
+       </div>
+       <p><br />Select keywords below to remove them from the system.
+       </p>
+     <form method="post" name="keyword-form" id="keyword-form"
+       tal:attributes="action request.route_url('keyword_manage')">
+      <table class="fancy hover">
+        <thead>
+          <th>Select</th>
+          <th>Keyword</th>
+          <th>User ID</th>
+          <th>Date/time</th>
+        </thead>
+        <tbody>
+          <tr tal:repeat="kw keywords" 
+              tal:attributes="class repeat.kw.odd and 'oddrow' or 'evenrow'">
+            <td>
+              <input type="checkbox" name="keyword" 
+                  tal:attributes="value kw.id; id string:keyword-${kw.id}" />
+            </td>
+            <td><label for="keyword-${kw.id}">${kw.keyword}</label></td>
+            <td>${kw.user_id}</td>
+            <td>${kw.entered_on + offset}</td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <input type="hidden" name="csrf_token" 
+                  tal:attributes="value request.session.get_csrf_token()" />
+              <input type="submit" name="delete" value="Delete" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+     </form>
+    </metal:content>
+  </body>
+</html>

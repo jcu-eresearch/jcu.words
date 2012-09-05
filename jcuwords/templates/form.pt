@@ -1,24 +1,37 @@
-<html>
+<html tal:define="master load:master.pt;
+                  _macros load:macros.pt;" metal:use-macro="master">
   <head>
-  <!-- CSS -->
-  <tal:block repeat="reqt css_links|[]">
-    <link rel="stylesheet"
-          href="${request.static_url('deform:static/%s' % reqt)}"
-          type="text/css" />
-  </tal:block>
-  <!-- JavaScript -->
-  <tal:block repeat="reqt js_links|[]">
-    <script type="text/javascript"
-            src="${request.static_url('deform:static/%s' % reqt)}"
-     ></script>
-  </tal:block>
+    <metal:head fill-slot="head">
+      <!-- CSS -->
+      <tal:block repeat="reqt css_links|[]">
+        <link rel="stylesheet"
+              href="${request.static_url('deform:static/%s' % reqt)}"
+              type="text/css" />
+      </tal:block>
+      <!-- JavaScript -->
+      <tal:block repeat="reqt js_links|[]">
+        <script type="text/javascript"
+                src="${request.static_url('deform:static/%s' % reqt)}"
+         ></script>
+      </tal:block>
+    </metal:head>
   </head>
   <body>
-    <h1>JCU Futures</h1>
-    <p>If you were to describe an improved university what words would you use? Tell us in 5 words</p>
-    <form tal:replace="structure form" />
-    <a href="#" tal:attributes="href request.route_url('home')">See cloud</a>
-    <a tal:attributes="href request.route_url('home', _query={'clear': ''})">Refresh the cloud</a>
-    <a href="#" tal:attributes="href return_url">Back to the JCU Futures site</a>
+    <metal:content fill-slot="content"
+      tal:define="has_submitted has_submitted|False">
+      <h2>Submit your ideas</h2>
+      <p>If you were to describe an improved university, what words would you use?</p>
+      <tal:show_form condition="not:has_submitted">
+      <p>Tell us in a maximum of 5 separate words. Providing words that are already in the cloud is encouraged.</p>
+        <form tal:replace="structure form" />
+      </tal:show_form>
+      <tal:dont_show_form condition="has_submitted">
+        <p>${form}</p>
+      </tal:dont_show_form>
+      <h2>Current cloud</h2>
+      <tal:cloud-config define="cloud_width string:400px">
+        <metal:cloud use-macro="_macros.cloud" />
+      </tal:cloud-config>
+    </metal:content>
   </body>
 </html>

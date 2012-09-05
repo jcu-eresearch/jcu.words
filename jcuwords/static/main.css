@@ -1,0 +1,9 @@
+ul.button-container {
+	list-style-type: none !important;
+}
+#user-actions .button-container .button {
+	width: 10em;
+}
+h1 {
+	padding-bottom: 0 !important;
+}

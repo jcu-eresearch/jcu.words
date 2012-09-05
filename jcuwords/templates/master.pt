@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      tal:define="_macros load:macros.pt;
+                  authenticated_userid import:pyramid.security.authenticated_userid;
+                  user authenticated_userid(request);
+                  permitted import:pyramid.security.has_permission;
+                  can_add permitted('add-keywords', context, request);
+                  can_manage permitted('manage-keywords', context, request)">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title><metal:titleslot metal:define-slot="title" /> - James Cook University</title>
+  <metal:head define-slot="head">
+  </metal:head>
+</head>
+<body>
+    <div id="tabs">
+      <li class="active"><a class="breadcrumb-home"
+        tal:attributes="href request.route_url('home')">Your Words</a></li>
+    </div>
+    <div id="breadcrumbs">
+       <a class="breadcrumb-home"
+          tal:attributes="href request.route_url('home')">Your Words</a>
+    </div>
+    <div id="user-actions">
+      <ul class="button-container" style="margin: 0 2em;">
+        <li>
+          <tal:noauth condition="not:user">
+            <a class="action-login button icon lock" 
+               tal:attributes="href request.route_url('auth-login')">
+               Login
+            </a>
+          </tal:noauth>
+          <tal:auth condition="user">
+            <a class="action-logout button icon lock" 
+               tal:attributes="href request.route_url('auth-logout')">
+               Logout ${user}
+            </a>
+          </tal:auth>
+        </li>
+        <li>
+          <a class="action-home button icon home"
+            tal:attributes="href request.route_url('home')">Home</a>
+        </li>
+        <li tal:condition="can_add">
+          <a class="action-add button icon add"
+            tal:attributes="href request.route_url('keyword_add')">Contribute words</a>
+        </li>
+        <tal:management condition="can_manage">
+          <li>
+          <a class="action-manage button icon tag"
+            tal:attributes="href request.route_url('keyword_manage')">Manage words</a>
+          </li>
+          <li>
+          <a class="action-refresh button icon reload"
+            tal:attributes="href request.route_url('home', _query={'clear': ''})">Refresh cloud</a>
+          </li>
+        </tal:management>
+      </ul>
+    </div>
+
+    <div id="content">
+      <h1>"The Future" Word Cloud</h1>
+      <metal:messages use-macro="_macros.messages" />
+      <metal:content define-slot="content">
+          Content
+      </metal:content>
+    </div>
+
+</body>
+</html>

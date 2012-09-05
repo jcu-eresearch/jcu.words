@@ -1,23 +1,23 @@
-<html>
-  <head>
-  <!-- CSS -->
-  <tal:block repeat="reqt css_links|[]">
-    <link rel="stylesheet"
-          href="${request.static_url('deform:static/%s' % reqt)}"
-          type="text/css" />
-  </tal:block>
-  <!-- JavaScript -->
-  <tal:block repeat="reqt js_links|[]">
-    <script type="text/javascript"
-            src="${request.static_url('deform:static/%s' % reqt)}"
-     ></script>
-  </tal:block>
-  </head>
-  <body>
-    <div tal:replace="structure keyword_cloud">
-        Cloud
-    </div>
-    <a tal:attributes="href request.route_url('keyword_add')">Add keywords</a>
-    <a href="#" tal:attributes="href return_url">Back to the JCU Futures site</a>
-  </body>
+<html tal:define="master load:master.pt;
+                  _macros load:macros.pt;" metal:use-macro="master">
+  <metal:head fill-slot="head">
+  </metal:head>
+  <metal:content fill-slot="content">
+  <p>Our <i>Word Cloud</i> is a pictorial arrangement of the top
+  contributed words, where the most important words are bigger than
+  others. Contribute to the "The Future" Word Cloud by describing your
+  improved University in 5 words.</p>
+      <p>The pictorial arrangement of words will be updated daily.
+      <b>Please note:</b> you
+      will only be able to contribute to the Word Cloud once.</p>
+      <p>
+        <a class="action-add button icon add" 
+          tal:attributes="href request.route_url('keyword_add')">
+          Contribute</a>&nbsp; your ideas now. 
+        <tal:nouser condition="not:user">
+           You'll need to log in with your JCU credentials.
+        </tal:nouser>
+      </p>
+      <metal:cloud use-macro="_macros.cloud" /> 
+      </metal:content>
 </html>

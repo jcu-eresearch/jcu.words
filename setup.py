@@ -7,19 +7,23 @@ README = open(os.path.join(here, 'README.txt')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
+    'jcu.common[forms,static]',
     'pyramid',
     'SQLAlchemy',
     'transaction',
     'pyramid_tm',
     'pyramid_deform',
     'pyramid_beaker',
-    'deform_bootstrap',
+    'pyramid_fanstatic',
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
     'waitress',
     'pytagcloud',
     'pygame',
     'simplejson',
+    'bleach',
+    'css.css3githubbuttons',
+    'js.jquery',
     ]
 
 setup(name='jcu.words',
@@ -47,6 +51,10 @@ setup(name='jcu.words',
       entry_points="""\
       [paste.app_factory]
       main = jcuwords:main
+
+      [fanstatic.libraries]
+      jcu.words = jcuwords.resources:library
+
       [console_scripts]
       initialize_jcu.words_db = jcuwords.scripts.initializedb:main
       """,

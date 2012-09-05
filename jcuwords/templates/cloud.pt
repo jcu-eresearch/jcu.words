@@ -1,45 +1,51 @@
 <html>
-<style>
-@font-face {
-font-family: 'PTSans';
-src: url('webfonts/ptsans/pt_sans-web-regular-webfont-2.eot');
-src: url('webfonts/ptsans/pt_sans-web-regular-webfont-2.eot?iefix') format('eot'),
-    url('webfonts/ptsans/pt_sans-web-regular-webfont-2.woff') format('woff'),
-    url('webfonts/ptsans/pt_sans-web-regular-webfont-2.ttf') format('truetype'),
-    url('webfonts/ptsans/pt_sans-web-regular-webfont-2.svg#PTSansRegular') format('svg');
-font-weight: normal;
-font-style: normal;
-}
+<tal:image condition="image|None">
+<img tal:attributes="src image;" />
+</tal:image>
+<tal:html condition="not:image|None">
+   <style>
+   @font-face {
+   font-family: 'PTSans';
+   src: url('webfonts/ptsans/pt_sans-web-regular-webfont-2.eot');
+   src: url('webfonts/ptsans/pt_sans-web-regular-webfont-2.eot?iefix') format('eot'),
+       url('webfonts/ptsans/pt_sans-web-regular-webfont-2.woff') format('woff'),
+       url('webfonts/ptsans/pt_sans-web-regular-webfont-2.ttf') format('truetype'),
+       url('webfonts/ptsans/pt_sans-web-regular-webfont-2.svg#PTSansRegular') format('svg');
+   font-weight: normal;
+   font-style: normal;
+   }
 
-div.cloud {
-position: relative;
-display: block;
-width: ${size[0]}px;
-height: ${size[1]}px;
-overflow: hidden;
-margin: 0 auto;
-padding: 0;
-list-style: none;
-background-color: black;
-}
-.tag{
-position: absolute;
-cursor: default;
-}
-a{text-decoration: none;}
-<tal:styles repeat="style css">
-.${style} { color: ${css[style][0]} }
-.${style}:hover { color: ${css[style][1]} }
-</tal:styles>
-</style>
+   div.cloud {
+   position: relative;
+   display: block;
+   width: ${size[0]}px;
+   height: ${size[1]}px;
+   overflow: hidden;
+   margin: 0 auto;
+   padding: 0;
+   list-style: none;
+   background-color: black;
+   }
+   .tag{
+   position: absolute;
+   cursor: default;
+   }
+   a{text-decoration: none;}
+   <tal:styles repeat="style css">
+   .${style} { color: ${css[style][0]} }
+   .${style}:hover { color: ${css[style][1]} }
+   </tal:styles>
+   </style>
 
-<div class="cloud">
-<tal:keywords repeat="link links">
-<a class="tag ${link['cls']}"
-   style="top: ${link['top']}px;
-          left: ${link['left']}px;
-          font-size: ${link['size']}px;">${link['tag']}</a>
+   <div class="cloud">
+   <tal:keywords repeat="link links">
+   <a class="tag ${link['cls']}"
+      style="top: ${link['top']}px;
+             left: ${link['left']}px;
+             line-height: ${link['lh']}px;
+             font-size: ${link['size']}px;">${link['tag']}</a>
 
-</tal:keywords>
-</div>
+   </tal:keywords>
+  </div>
+</tal:html>
 </html>

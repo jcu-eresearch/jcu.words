@@ -1,3 +1,4 @@
+import datetime
 from sqlalchemy import (
     Column,
     Integer,
@@ -21,7 +22,7 @@ class Keyword(Base):
     __tablename__ = 'keywords'
     id = Column(Integer, primary_key=True)
     keyword = Column(Text)
-    entered_on = Column(DateTime)
+    entered_on = Column(DateTime, default=datetime.datetime.utcnow())
     user_id = Column(Text)
     
     def __init__(self, keyword, user_id):
