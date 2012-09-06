@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 from StringIO import StringIO
 
 import deform
@@ -253,6 +254,11 @@ class ManageKeywordsView(BaseView):
         writer = csv.DictWriter(output,
                                 ['id', 'keyword', 'entered_on', 'user_id'],
                                 extrasaction='ignore')
+        writer.writeheader()
         for keyword in self.manager.all():
             writer.writerow(vars(keyword))
+
+        filename = 'word-cloud-export-%s.csv' % datetime.now().isoformat()
+        self.request.response.headers['Content-Disposition'] = \
+                'attachment; filename="%s"' % filename
         return output.getvalue()
