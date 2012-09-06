@@ -254,7 +254,7 @@ class ManageKeywordsView(BaseView):
         writer = csv.DictWriter(output,
                                 ['id', 'keyword', 'entered_on', 'user_id'],
                                 extrasaction='ignore')
-        writer.writeheader()
+        #writer.writeheader()
         for keyword in self.manager.all():
             writer.writerow(vars(keyword))
 
