@@ -1,4 +1,7 @@
 <html tal:define="master load:master.pt" metal:use-macro="master">
+  <metal:title fill-slot="title">                        
+  Manage Words - "The Future" Word Cloud 
+  </metal:title>
   <body>
     <metal:content fill-slot="content"
        tal:define="timedelta import:datetime.timedelta;

@@ -1,6 +1,9 @@
 <html tal:define="master load:master.pt;
                   _macros load:macros.pt;" metal:use-macro="master">
   <head>
+  <metal:title fill-slot="title">                        
+  Contribute - "The Future" Word Cloud 
+  </metal:title>
     <metal:head fill-slot="head">
       <!-- CSS -->
       <tal:block repeat="reqt css_links|[]">

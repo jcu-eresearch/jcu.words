@@ -1,5 +1,9 @@
 <html tal:define="master load:master.pt;
                   _macros load:macros.pt;" metal:use-macro="master">
+
+  <metal:title fill-slot="title">
+  "The Future" Word Cloud
+  </metal:title>
   <metal:head fill-slot="head">
   </metal:head>
   <metal:content fill-slot="content">
