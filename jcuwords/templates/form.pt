@@ -25,7 +25,12 @@
       <h2>Submit your ideas</h2>
       <p>If you were to describe an improved university, what words would you use?</p>
       <tal:show_form condition="not:has_submitted">
-      <p>Tell us in a maximum of 5 separate words. Providing words that are already in the cloud is encouraged.</p>
+      <p>Tell us in a maximum of <i>5 separate words</i>, using only 
+      <b>one</b> word in each box. Phases such as 
+      <i>"Sustainable Development"</i> or <i>"Tropical Research"</i>
+      should be entered as separate words.<br />
+      You <b>can</b> use words already in the cloud. The more times a word
+      is entered the <b style="font-size: 120%;">larger</b> it becomes!</p>
         <form tal:replace="structure form" />
       </tal:show_form>
       <tal:dont_show_form condition="has_submitted">
