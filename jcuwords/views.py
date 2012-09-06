@@ -73,7 +73,7 @@ class CloudMaker(object):
     def keyword_cloud_png(self):
         asset = self.resolver.resolve('jcuwords:keyword-cloud.png')
         _cloud = open(asset.abspath()).read()
-        return Response(content_type='text/png',
+        return Response(content_type='image/png',
                         body=_cloud)
 
     @view_config(name="keyword-cloud")
