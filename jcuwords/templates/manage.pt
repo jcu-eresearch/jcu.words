@@ -14,7 +14,7 @@
          <div class="button-group">
            <a class="button primary icon log"
               tal:attributes="href request.route_url('keyword_export')">
-             Export as text
+             Export as CSV
            </a>
          </div>
          Sort by:
