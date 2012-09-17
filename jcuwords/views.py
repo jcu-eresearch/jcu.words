@@ -68,8 +68,8 @@ class CloudMaker(object):
         self.context = context
         self.request = request
         self.resolver = AssetResolver()
-        self.minsize = int(request.registry.settings['jcu.words.minsize'])
-        self.maxsize = int(request.registry.settings['jcu.words.maxsize'])
+        self.minsize = int(request.registry.settings['jcu.words.minsize'], 10)
+        self.maxsize = int(request.registry.settings['jcu.words.maxsize'], 100)
 
     @view_config(name="keyword-cloud.png")
     def keyword_cloud_png(self):
