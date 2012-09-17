@@ -68,6 +68,8 @@ class CloudMaker(object):
         self.context = context
         self.request = request
         self.resolver = AssetResolver()
+        self.minsize = int(request.registry.settings['jcu.words.minsize'])
+        self.maxsize = int(request.registry.settings['jcu.words.maxsize'])
 
     @view_config(name="keyword-cloud.png")
     def keyword_cloud_png(self):
@@ -98,9 +100,9 @@ class CloudMaker(object):
             max_size = 42
         else:
             max_tags = 100
-            max_size = 60
+            max_size = self.maxsize
 
-        tags = make_tags(get_tag_counts(text)[:max_tags], minsize=1,
+        tags = make_tags(get_tag_counts(text)[:max_tags], minsize=self.minsize,
                          maxsize=max_size)
 
         if output_html:
