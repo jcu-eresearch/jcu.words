@@ -34,10 +34,17 @@
        tal:attributes="action request.route_url('keyword_manage')">
       <table class="fancy hover">
         <thead>
-          <th>Select</th>
-          <th>Keyword</th>
-          <th>User ID</th>
-          <th>Date/time</th>
+          <tr>
+            <td colspan="4"><b>Stats:</b> ${len(keywords)} entries consisting of
+              ${unique_word_count} unique words contributed by ${user_count} users.
+            </td>
+          </tr>
+          <tr>
+            <th>Select</th>
+            <th>Keyword</th>
+            <th>User ID</th>
+            <th>Date/time</th>
+          </tr>
         </thead>
         <tbody>
           <tr tal:repeat="kw keywords" 

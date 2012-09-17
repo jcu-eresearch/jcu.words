@@ -248,7 +248,13 @@ class ManageKeywordsView(BaseView):
         if order_by not in ['keyword', 'entered_on', 'user_id']:
             order_by = 'keyword'
 
-        return {'keywords': self.manager.all(order_by=order_by)}
+        keywords = self.manager.all(order_by=order_by)
+        unique_word_count = len(set(kw.keyword.lower() for kw in keywords))
+        user_count = len(set(kw.user_id for kw in keywords))
+        
+        return {'keywords': keywords,
+                'unique_word_count' : unique_word_count,
+                'user_count': user_count}
 
     @view_config(route_name='keyword_export', renderer='string')
     def export_view(self):
