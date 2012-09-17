@@ -1,6 +1,8 @@
 <html>
 <tal:image condition="image|None">
-<img tal:attributes="src image;" />
+<a href="${image}" title="Click to see higher-resolution version of the word cloud">
+    <img tal:attributes="src image;" />
+</a>
 </tal:image>
 <tal:html condition="not:image|None">
    <style>
